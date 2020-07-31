@@ -21,7 +21,7 @@ namespace WeatherAppServer.Utils
         public static HttpResponseMessage ExceptionResponse(Exception ex)
         {
             var metadata = new MetaData(((int)Enums.MessageCodeTypes.Failure).ToString(), ex.Message);
-            string json = JsonConvert.SerializeObject(metadata);
+            var json = JsonConvert.SerializeObject(new { data = "", metaData = metadata }, Formatting.None);
             return JsonResponse(json);
         }
         public static string ConvertObject(object obj)
