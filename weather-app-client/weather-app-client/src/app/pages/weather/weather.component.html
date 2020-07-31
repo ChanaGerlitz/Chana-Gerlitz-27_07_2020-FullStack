@@ -1,0 +1,84 @@
+<div class="area">
+    <div class="header">
+        {{page== favorites? 'Favorites': 'Weather Search'}}
+    </div>
+    <div *ngIf="page!= favorites">
+        <div class="bs-example">
+            <form #form="ngForm" ngNativeValidate ngSubmit="citiesSearch()">
+                <div class="row content">
+                    <div class="col-sm-5">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search..." name="Search"
+                                [(ngModel)]="citiesRequest.Search" (keyup.enter)="citiesSearch()" required>
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-secondary" (click)="citiesSearch()">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 loader">
+            <mat-progress-spinner [diameter]="30" class="content loader" *ngIf="isLoading" mode="indeterminate">
+            </mat-progress-spinner>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-7">
+            <div *ngIf="weatherCityResponse!= null">
+                <div class="cityWeatherArea">
+                    <div class="row cityWeatherContent">
+                        <div class="col-4">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="weatherFont">{{weatherCityResponse.CityName}}</div>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-2">
+                                    <div class="weatherFont">{{weatherCityResponse.WeatherText}}</div>
+                                </div>
+                                <div class="col-1">
+                                </div>
+                                <div class="col-7">
+                                    <div class="weatherFont">{{weatherCityResponse.TemperatureValue}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="row marginBtn">
+                                <div class="col-1">
+                                    <i class="fa fa-heart fa-2x"></i>
+                                </div>
+                                <div class="col-3">
+                                    <button class="btn btn-secondary btnFavorites" (click)="addOrRemoveFavorites()">
+                                        {{page != favorites ? 'add to Favorits' : 'remove from Favorites'}}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-5">
+            <div
+                *ngIf="( citiesResponse!= null && ( ( citiesResponse.CitiesList.length > 1 ) ||(page == favorites) ))">
+                <div class="citiesList">
+                    <ul class="textAlign">
+                        <li *ngFor="let row of citiesResponse.CitiesList; let index" class="media">
+                            <div class="media-body">
+                                <span class="cityClass" (click)="weatherSearchByCity(row)">{{row.LocalizedName}}</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

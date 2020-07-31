@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="WeatherAppModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CitiesFavorites">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Key" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="LocalizedName" Type="varchar" MaxLength="250" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CitiesStub">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Request" Type="varchar(max)" Nullable="false" />
+    <Property Name="Response" Type="varchar(max)" Nullable="false" />
+    <Property Name="CreateDate" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CitiesWeather">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CityKey" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="TemperatureValue" Type="float" Nullable="false" />
+    <Property Name="WeatherText" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="UpdateDate" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="WeatherAppModelStoreContainer">
+    <EntitySet Name="CitiesFavorites" EntityType="Self.CitiesFavorites" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CitiesStub" EntityType="Self.CitiesStub" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CitiesWeather" EntityType="Self.CitiesWeather" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
